@@ -23,7 +23,7 @@ Open localhost:3000
 
 ## Future Work
 - Train a face recogntion model with various head poses and pyramids of sample images.
-- Replace face similarity algorithms that uses better facial extraction method such as Siamese Network for Face Similarity.
+- Replace face similarity algorithms that uses better facial extraction method such as Siamese Network for Face Similarity or OpenFACE.
 - Homomorphic Filtering before facial recognition.
 - Image smoothing before facial recognition.
 
