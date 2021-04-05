@@ -30,6 +30,12 @@ comparebutton.addEventListener(
   false
 );
 
+navigator.getUserMedia =
+  navigator.getUserMedia ||
+  navigator.webkitGetUserMedia ||
+  navigator.mozGetUserMedia ||
+  navigator.msGetUserMedia;
+
 const startVideo = () =>
   navigator.getUserMedia(
     { video: {} },
@@ -41,6 +47,7 @@ Promise.all([
   faceapi.nets.tinyYolov2.loadFromUri("/models"),
   faceapi.nets.ssdMobilenetv1.loadFromUri("/models"),
   faceapi.nets.faceLandmark68Net.loadFromUri("/models"),
+  faceapi.nets.faceRecognitionNet.loadFromUri("/models"),
 ]).then(startVideo);
 
 const detectFacial = async (data, element) =>
@@ -75,8 +82,10 @@ const compare = async () =>
         faceapi.euclideanDistance(descriptors[0], descriptors[1])
       );
       distance < 0.6
-        ? alert(`Same with Euclidean Distance: ${distance}`)
-        : alert(`Not same with Euclidean Distance: ${distance}`);
+        ? alert(
+            `Both the faces are the same with Euclidean Distance: ${distance}`
+          )
+        : alert(`Faces are not same with Euclidean Distance: ${distance}`);
     });
   });
 
