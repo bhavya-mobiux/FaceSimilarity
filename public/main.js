@@ -14,7 +14,7 @@ startbutton.addEventListener(
   "click",
   (event) => {
     event.preventDefault();
-    takepicture();
+    takePicture();
   },
   false
 );
@@ -106,22 +106,19 @@ const extractFaceFromBox = async (inputImage, box, element) =>
 
 const preProcessCanvasImage = () => {
   let mat = cv.imread(canvas);
-  let dst = new cv.Mat();
   cv.cvtColor(mat, mat, cv.COLOR_RGBA2GRAY, 0);
-  cv.equalizeHist(mat, dst);
-  cv.normalize(dst, dst, 0, 255, cv.NORM_MINMAX, -1, new cv.Mat());
-  cv.medianBlur(dst, dst, 3);
+  cv.medianBlur(mat, mat, 3);
+  cv.normalize(mat, mat, 0, 255, cv.NORM_MINMAX, -1, new cv.Mat());
+  cv.equalizeHist(mat, mat);
   cv.imshow(canvas, mat);
-  cv.imshow(canvas, dst);
   mat.delete();
-  dst.delete();
   return canvas.toDataURL("image/png");
 };
 
-const takepicture = async () => {
+const takePicture = async () => {
   var context = canvas.getContext("2d");
-  const width = video.width;
-  const height = video.height;
+  const { width } = video;
+  const { height } = video;
   canvas.width = width;
   canvas.height = height;
   context.drawImage(video, 0, 0, width, height);
