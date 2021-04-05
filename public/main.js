@@ -100,7 +100,7 @@ const extractFaceFromBox = async (inputImage, box, element) =>
     ])
     .then((faceImages) =>
       faceImages.length == 0
-        ? console.log("Face not found")
+        ? alert("Face not found")
         : faceImages.forEach((cnv) => (element.src = cnv.toDataURL()))
     );
 
