@@ -107,7 +107,8 @@ const preProcessCanvasImage = () => {
   let dst = new cv.Mat();
   cv.cvtColor(mat, mat, cv.COLOR_RGBA2GRAY, 0);
   cv.equalizeHist(mat, dst);
-  cv.normalize(mat, dst, 0, 255, cv.NORM_MINMAX, -1, new cv.Mat());
+  cv.normalize(dst, dst, 0, 255, cv.NORM_MINMAX, -1, new cv.Mat());
+  cv.medianBlur(dst, dst, 5);
   cv.imshow(canvas, mat);
   cv.imshow(canvas, dst);
   mat.delete();
