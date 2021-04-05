@@ -25,7 +25,9 @@ comparebutton.addEventListener(
   "click",
   (event) => {
     event.preventDefault();
-    compare();
+    photo1 && photo2 && photo1.getAttribute("src") && photo2.getAttribute("src")
+      ? compare()
+      : alert("Capture the second image to compare");
   },
   false
 );
@@ -108,7 +110,7 @@ const preProcessCanvasImage = () => {
   cv.cvtColor(mat, mat, cv.COLOR_RGBA2GRAY, 0);
   cv.equalizeHist(mat, dst);
   cv.normalize(dst, dst, 0, 255, cv.NORM_MINMAX, -1, new cv.Mat());
-  cv.medianBlur(dst, dst, 5);
+  cv.medianBlur(dst, dst, 3);
   cv.imshow(canvas, mat);
   cv.imshow(canvas, dst);
   mat.delete();
